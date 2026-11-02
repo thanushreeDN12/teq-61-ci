@@ -1,0 +1,21 @@
+name: build and push
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: sign in to docker hub
+        uses: docker/login-action@v4
+        with:
+          username: tanu1122
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: build and push the image
+        uses: docker/build-push-action@v7
+        with:
+          push: true
+          tags: tanu1122/ci-61-practice
